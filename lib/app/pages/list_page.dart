@@ -15,13 +15,16 @@ class ListaCocoa extends StatelessWidget {
     return Container(
       child: FutureBuilder(
           future: futureCooca,
-          builder: (context, snapshot) {
+          builder: (_, AsyncSnapshot<List<Cocoa>> snapshot) {
             if (snapshot.hasData) {
+              final dataCocoa = snapshot.data;
               return ListView.builder(
-                itemCount: 1,
-                itemBuilder: (context, index) {
+                itemCount: dataCocoa?.length,
+                itemBuilder: (_, index) {
                   return ListTile(
-                    title: const Text("xxxx"),
+                    title: Text("fecha: ${dataCocoa![index].mes}"),
+                    leading: Text("var : ${dataCocoa[index].cocoaVar}"),
+                    trailing: Text("Gráfico : ${dataCocoa[index].grfico}"),
                   );
                 },
               );
